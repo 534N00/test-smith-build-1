@@ -13,6 +13,7 @@ type FreeResponseQuestion = {
 type TrueFalseQuestion = {
     type: "true-false";
     question: string;
+    answer: "true" | "false";
 };
 
 type SentenceCompletionQuuesstion = {
