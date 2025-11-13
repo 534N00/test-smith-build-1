@@ -55,10 +55,25 @@ export default function Page() {
     const onGenerateTest = async () => {
         try {
             setLoading(true);
-            await fetch("/api/test/generate", {
-                method: "POST"
+            const body = JSON.stringify({
+                config: {
+                    files,
+                    numQuestions,
+                    timeLimit,
+                    questionTypes
+                }
             });
-            router.push('/test');
+
+            const res = await fetch("/api/test/config", {
+                method: "POST",
+                body
+            });
+
+            if (res.ok) {
+                router.push('/test');
+            } else {
+                // No error handling for simulation.
+            }
         } catch {
             setLoading(false);
         }
