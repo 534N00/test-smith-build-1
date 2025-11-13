@@ -1,8 +1,8 @@
 type MultipleChoiceQuestion = {
     type: "multiple-choice";
     question: string;
+    options: string[];
     answers: string[];
-    correctAnswerIndex: number;
 };
 
 type FreeResponseQuestion = {
@@ -23,8 +23,8 @@ type SentenceCompletionQuuesstion = {
 type SelectionQuestion = {
     type: "selection";
     question: string;
-    answers: string[];
-    correctAnswerIndexes: number[];
+    options: string[];
+    answers: number[];
 };
 
 export type Question = MultipleChoiceQuestion
