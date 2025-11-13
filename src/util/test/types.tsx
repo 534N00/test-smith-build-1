@@ -1,27 +1,27 @@
-type MultipleChoiceQuestion = {
+export type MultipleChoiceQuestion = {
     type: "multiple-choice";
     question: string;
     options: string[];
     answers: string[];
 };
 
-type FreeResponseQuestion = {
+export type FreeResponseQuestion = {
     type: "free-response";
     question: string;
 };
 
-type TrueFalseQuestion = {
+export type TrueFalseQuestion = {
     type: "true-false";
     question: string;
     answer: "true" | "false";
 };
 
-type SentenceCompletionQuuesstion = {
+export type SentenceCompletionQuuesstion = {
     type: "sentence-completion";
     question: string; // Will include the underscores as blanks.
 };
 
-type SelectionQuestion = {
+export type SelectionQuestion = {
     type: "selection";
     question: string;
     options: string[];
