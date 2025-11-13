@@ -5,7 +5,7 @@ import { sleep } from "@util/sleep";
 
 /**
  * This endpoint takes in a config and does nothing.
- * Used in the /generate page when the user presses Generate Test
+ * Used in the /config page when the user presses Generate Test
  * 
  * In a real app, we would validate the request "req" object to ensure it is an ok configuration.
  * If not valid, we would send a non 200 HTTP error.

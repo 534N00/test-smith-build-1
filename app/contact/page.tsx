@@ -133,7 +133,7 @@ const Page = () => {
                                 <h3 className="text-xl font-semibold text-gray-900">Thanks — we received your message</h3>
                                 <p className="text-gray-600 mt-2">We will get back to you at the email address you provided.</p>
                                 <div className="mt-6">
-                                    <Link href="/generate">
+                                    <Link href="/config">
                                         <Button>Generate a Quiz</Button>
                                     </Link>
                                 </div>

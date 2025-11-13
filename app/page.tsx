@@ -14,7 +14,7 @@ export default function Page() {
                     </h1>
                 </div>
 
-                <Link href="/generate">
+                <Link href="/config">
                     <Button>Get Started</Button>
                 </Link>
             </div>
