@@ -25,7 +25,6 @@ export default function TrueFalse({
                     >
                         <input
                             type="radio"
-                            name={`question-${question}`}
                             value={option}
                             checked={userAnswer === option.toLowerCase()}
                             onChange={(e) => updateAnswer(option.toLowerCase())}

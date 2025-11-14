@@ -25,7 +25,6 @@ export default function MultipleChoice({
                     >
                         <input
                             type="radio"
-                            name={`question-${question}`}
                             value={option}
                             checked={userAnswer === optionIndex}
                             onChange={(e) => updateAnswer(optionIndex)}
