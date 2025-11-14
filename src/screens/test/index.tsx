@@ -12,6 +12,7 @@ import CheckIfLoading from "@components/CheckIfLoading";
 import TestQuestion from "./Question";
 
 import { Test } from "@util/test/types";
+import { sleep } from "@util/sleep";
 
 
 
@@ -61,9 +62,14 @@ export default function TestPage() {
         }));
     }, [setUserAnswers]);
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         console.log("Submitting answers:", userAnswers);
         setIsPaused(true);
+
+        setLoading(true);
+        await sleep(1000); // Simulate ai thinking.
+        setLoading(false);
+
         setReview(true);
     };
 
