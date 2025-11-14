@@ -67,6 +67,10 @@ export default function TestPage() {
         setReview(true);
     };
 
+    const handleContinue = () => {
+        // move to more ai reviews/results
+    };
+
 
     useEffect(() => {
         generateTest();
@@ -145,12 +149,21 @@ export default function TestPage() {
 
 
                             <div className="flex justify-center mt-8">
-                                <button
-                                    onClick={handleSubmit}
-                                    className="bg-gray-400 hover:bg-gray-500 text-gray-900 font-semibold px-16 py-4 rounded text-lg transition-colors"
-                                >
-                                    Submit
-                                </button>
+                                {!review ?
+                                    <button
+                                        onClick={handleSubmit}
+                                        className="cursor-pointer bg-gray-400 hover:bg-gray-500 text-gray-900 font-semibold px-16 py-4 rounded text-lg transition-colors"
+                                    >
+                                        Submit
+                                    </button>
+                                :
+                                    <button
+                                        onClick={handleContinue}
+                                        className="cursor-pointer bg-gray-400 hover:bg-gray-500 text-gray-900 font-semibold px-16 py-4 rounded text-lg transition-colors"
+                                    >
+                                        Continue
+                                    </button>
+                                }
                             </div>
                         </div>
                     </>
