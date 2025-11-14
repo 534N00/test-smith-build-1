@@ -30,13 +30,13 @@ export default function Layout({ children }: Readonly<{ children: React.ReactNod
             >
                 <nav className="fixed top-0 left-0 right-0 bg-white border-2 border-gray-200">
                     <div className="flex items-center gap-4 px-8 py-4">
-                        <Link href="/">
+                        <Link href="/" title="Home">
                             <Button>Home</Button>
                         </Link>
-                        <Link href="/about">
+                        <Link href="/about" title="About">
                             <Button>About</Button>
                         </Link>
-                        <Link href="/contact">
+                        <Link href="/contact" title="Contact">
                             <Button>Contact</Button>
                         </Link>
                     </div>

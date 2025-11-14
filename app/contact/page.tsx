@@ -89,7 +89,7 @@ const Page = () => {
                                         id="name"
                                         value={name}
                                         onChange={(e) => setName(e.target.value)}
-                                        className="pl-2 mt-1 block w-full rounded-md border-gray-200 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                        className="pl-2 mt-1 block w-full rounded-md border-gray-200 bg-gray-100 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                                         placeholder="Your name"
                                         required
                                     />
@@ -102,7 +102,7 @@ const Page = () => {
                                         type="email"
                                         value={email}
                                         onChange={(e) => setEmail(e.target.value)}
-                                        className="pl-2 mt-1 block w-full rounded-md border-gray-200 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                        className="pl-2 mt-1 block w-full rounded-md border-gray-200 bg-gray-100 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                                         placeholder="you@example.com"
                                         required
                                     />
@@ -114,7 +114,7 @@ const Page = () => {
                                         id="message"
                                         value={message}
                                         onChange={(e) => setMessage(e.target.value)}
-                                        className="pl-2 mt-1 block w-full rounded-md border-gray-200 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                        className="pl-2 mt-1 block w-full rounded-md border-gray-200 bg-gray-100 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                                         rows={6}
                                         placeholder="Tell us a little about your project or question"
                                         required
