@@ -6,12 +6,14 @@ interface MultipleChoiceProps {
     question: MultipleChoiceQuestion;
     userAnswer: number | undefined; // Index of options.
     updateAnswer: (answer: any) => void;
+    disabled: boolean;
 }
 
 export default function MultipleChoice({
     question,
     userAnswer,
-    updateAnswer
+    updateAnswer,
+    disabled
 }: MultipleChoiceProps) {
     return (
         <div className="w-full">
@@ -27,7 +29,8 @@ export default function MultipleChoice({
                             value={option}
                             checked={userAnswer === optionIndex}
                             onChange={(e) => updateAnswer(optionIndex)}
-                            className="w-5 h-5 text-blue-600"
+                            disabled={disabled}
+                            className="w-5 h-5 text-blue-600 disabled:cursor-not-allowed"
                         />
                         <span className="text-gray-800">{option}</span>
                     </label>

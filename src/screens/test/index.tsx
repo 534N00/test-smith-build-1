@@ -6,10 +6,12 @@ import {
     useState
 } from "react"
 
-import CheckIfLoading from "@components/CheckIfLoading";
+import { Pause, Play } from "lucide-react";
 
-import { Test, Question } from "@util/test/types";
+import CheckIfLoading from "@components/CheckIfLoading";
 import TestQuestion from "./Question";
+
+import { Test } from "@util/test/types";
 
 
 
@@ -17,7 +19,10 @@ export default function TestPage() {
     const [loading, setLoading] = useState<boolean>(false);
     const [test, setTest] = useState<Test | null>(null);
     const [timeRemaining, setTimeRemaining] = useState<number | null>(null);
+    const [isPaused, setIsPaused] = useState<boolean>(false);
     const [userAnswers, setUserAnswers] = useState<Record<number, any>>({});
+    const [review, setReview] = useState<boolean>(false); // For after user submits, reivew the responses.
+
 
     const generateTest = useCallback(async () => {
         try {
@@ -31,7 +36,7 @@ export default function TestPage() {
                 const data = await res.json();
                 setTest(data.test);
                 if (data.test.timeLimit) {
-                    setTimeRemaining(data.test.timeLimit);
+                    setTimeRemaining(10);
                 }
             } else {
                 // No error handling for simulated data.
@@ -42,13 +47,34 @@ export default function TestPage() {
         }
     }, []);
 
+    const formatTime = (seconds: number): string => {
+        const hours = Math.floor(seconds / 3600);
+        const minutes = Math.floor((seconds % 3600) / 60);
+        const secs = seconds % 60;
+        return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
+    };
+
+    const handleAnswerChange = useCallback((questionIndex: number, answer: any) => {
+        setUserAnswers((prev) => ({
+            ...prev,
+            [questionIndex]: answer
+        }));
+    }, [setUserAnswers]);
+
+    const handleSubmit = () => {
+        console.log("Submitting answers:", userAnswers);
+        setIsPaused(true);
+        setReview(true);
+    };
+
+
     useEffect(() => {
         generateTest();
     }, [generateTest]);
 
     // Timer countdown.
     useEffect(() => {
-        if (timeRemaining === null || timeRemaining <= 0) return;
+        if (timeRemaining === null || timeRemaining <= 0 || isPaused) return;
 
         const interval = setInterval(() => {
             setTimeRemaining((prev) => {
@@ -58,29 +84,14 @@ export default function TestPage() {
         }, 1000);
 
         return () => clearInterval(interval);
-    }, [timeRemaining]);
+    }, [timeRemaining, isPaused]);
 
-    const formatTime = (seconds: number): string => {
-        const hours = Math.floor(seconds / 3600);
-        const minutes = Math.floor((seconds % 3600) / 60);
-        const secs = seconds % 60;
-        return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
-    };
-
-
-    const handleAnswerChange = useCallback((questionIndex: number, answer: any) => {
-        setUserAnswers((prev) => ({
-            ...prev,
-            [questionIndex]: answer
-        }));
-    }, [setUserAnswers]);
-
-
-    const handleSubmit = () => {
-        console.log("Submitting answers:", userAnswers);
-        // TODO: Handle submission
-    };
-
+    // Auto-submit when timer reaches 0.
+    useEffect(() => {
+        if (timeRemaining === 0 && !review) {
+            handleSubmit();
+        }
+    }, [timeRemaining, review]);
 
 
     return (
@@ -88,16 +99,34 @@ export default function TestPage() {
             <CheckIfLoading loading={loading || !test}>
                 {test && (
                     <>
-                        <div className="bg-white border-b border-gray-200 sticky top-0 z-10">
-                            <div className="max-w-4xl mx-auto px-8 py-4 flex items-center justify-between">
-                                <div className="bg-gray-200 px-4 py-2 rounded text-gray-900 font-mono text-lg">
-                                    {timeRemaining !== null ? formatTime(timeRemaining) : "No time limit"}
-                                </div>
+                        <div className="bg-white border-b border-gray-200">
+                            <div className="max-w-4xl mx-auto px-8 py-4 relative flex items-center justify-center">
                                 <h1 className="text-2xl font-semibold text-gray-900">
                                     {test.title}
                                 </h1>
-                                <div className="flex gap-2">
-                                    {/* Pause button here */}
+                                <div className="absolute right-3 flex items-center gap-3">
+                                    <div className="bg-gray-200 px-4 py-2 rounded text-gray-900 font-mono text-lg">
+                                        {timeRemaining !== null ? formatTime(timeRemaining) : "No time limit"}
+                                    </div>
+                                    {!review &&
+                                        <button
+                                            onClick={() => setIsPaused(!isPaused)}
+                                            className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded flex items-center gap-2 transition-colors"
+                                            disabled={timeRemaining === null || review}
+                                        >
+                                            {isPaused ? (
+                                                <>
+                                                    <Play size={18} />
+                                                    Resume
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <Pause size={18} />
+                                                    Pause
+                                                </>
+                                            )}
+                                        </button>
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -110,6 +139,7 @@ export default function TestPage() {
                                     question={question}
                                     userAnswers={userAnswers}
                                     handleAnswerChange={handleAnswerChange}
+                                    review={review}
                                 />
                             ))}
 

@@ -1,6 +1,8 @@
 export type FreeResponseQuestion = {
     type: "free-response";
     question: string;
+    correct: boolean; // Hardcoding if the user got this question correct, since we cannot dynamically check without AI.
+    aiResponse: string; // Again, hardcoded.
 };
 
 export type MultipleChoiceQuestion = {
@@ -8,6 +10,7 @@ export type MultipleChoiceQuestion = {
     question: string;
     options: string[];
     answer: number; // Index of correct option.
+    aiResponses: string[]; // Responses the AI gives for each choice of the user.
 };
 
 export type SelectAllQuestion = {
@@ -15,17 +18,21 @@ export type SelectAllQuestion = {
     question: string;
     options: string[];
     answers: number[]; // Indices of correct options.
+    aiResponses: string[]; // Responses the AI gives for each choice of the user.
 };
 
 export type SentenceCompletionQuestion = {
     type: "sentence-completion";
     question: string; // Will include the underscores as blanks.
+    answer: string;
+    aiResponse: string;
 };
 
 export type TrueFalseQuestion = {
     type: "true-false";
     question: string;
     answer: "true" | "false";
+    aiResponse: string;
 };
 
 

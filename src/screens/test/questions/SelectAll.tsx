@@ -6,12 +6,14 @@ interface SelectAllProps {
     question: SelectAllQuestion;
     userAnswer: number[] | undefined; // Indices of options.
     updateAnswer: (answer: any) => void;
+    disabled: boolean;
 }
 
 export default function SelectAll({
     question,
     userAnswer,
-    updateAnswer
+    updateAnswer,
+    disabled
 }: SelectAllProps) {
     const handleCheckboxChange = (optionIndex: number) => {
         const currentAnswers = userAnswer || [];
@@ -36,7 +38,8 @@ export default function SelectAll({
                             type="checkbox"
                             checked={userAnswer?.includes(optionIndex) || false}
                             onChange={(e) => handleCheckboxChange(optionIndex)}
-                            className="w-5 h-5 text-blue-600, rounded"
+                            className="w-5 h-5 text-blue-600 rounded disabled:cursor-not-allowed"
+                            disabled={disabled}
                         />
                         <span className="text-gray-800">{option}</span>
                     </label>
