@@ -21,7 +21,7 @@ const Page = () => {
                 </p>
             </div>
             <div className="flex space-x-56">
-                <Link href="/test"><Button onClick={() => {console.log("generate another quiz click")}}>Do another</Button></Link>
+                <Link href="/test"><Button>Do another</Button></Link>
                 <Link href="/config"><Button>Change Settings</Button></Link>
             </div>
         </div>
