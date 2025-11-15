@@ -6,7 +6,8 @@ import Button from '@components/Button';
 import ErrorPopup from '@/src/components/ErrorPopup';
 import { useRouter } from 'next/navigation';
 import CheckIfLoading from '@components/CheckIfLoading';
-
+import { useTestStore } from '../../src/stores/testStore';
+import { Test } from '@util/test/types';
 
 
 interface UploadedFile {
@@ -29,6 +30,7 @@ export default function Page() {
         sentenceCompletion: false,
         selection: false
     });
+    const setTest = useTestStore((s) => s.setTest); // zustand store for test
 
 
     const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -119,6 +121,9 @@ export default function Page() {
             });
 
             if (res.ok) {
+                // populate zustand store with data
+                const data = await res.json();
+                setTest(data.test);
                 router.push('/test');
             } else {
                 // No error handling for simulation.
