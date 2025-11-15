@@ -15,41 +15,43 @@ import TestQuestion from "./Question";
 
 import { Test } from "@util/test/types";
 import { sleep } from "@util/sleep";
+import { useTestStore } from "../../stores/testStore";
 
 
 
 export default function TestPage() {
     const [loading, setLoading] = useState<boolean>(false);
-    const [test, setTest] = useState<Test | null>(null);
-    const [timeRemaining, setTimeRemaining] = useState<number | null>(null);
+    const test = useTestStore((state) => state.test);
+    const [timeRemaining, setTimeRemaining] = useState<number | null>(test ? test.timeLimit : null);
     const [isPaused, setIsPaused] = useState<boolean>(false);
     const [userAnswers, setUserAnswers] = useState<Record<number, any>>({});
     const [review, setReview] = useState<boolean>(false); // For after user submits, reivew the responses.
 
 
-    const generateTest = useCallback(async () => {
-        try {
-            setLoading(true);
+    // const generateTest = useCallback(async () => {
+    //     try {
+    //         setLoading(true);
 
-            const res = await fetch("/api/test/generate", {
-                method: "GET"
-            });
+    //         const res = await fetch("/api/test/generate", {
+    //             method: "GET"
+    //         });
 
-            if (res.ok) {
-                const data = await res.json();
-                setTest(data.test);
+    //         if (res.ok) {
+    //             const data = await res.json();
+    //             setTest(data.test);
 
-                if (data.test.timeLimit) {
-                    setTimeRemaining(data.test.timeLimit);
-                }
-            } else {
-                // No error handling for simulated data.
-            }
-        } catch {
-        } finally {
-            setLoading(false);
-        }
-    }, []);
+    //             if (data.test.timeLimit) {
+    //                 setTimeRemaining(data.test.timeLimit);
+    //             }
+    //         } else {
+    //             // No error handling for simulated data.
+    //         }
+    //     } catch {
+    //     } finally {
+    //         setLoading(false);
+    //     }
+    // }, []);
+   
 
     const formatTime = (seconds: number): string => {
         const hours = Math.floor(seconds / 3600);
@@ -92,9 +94,9 @@ export default function TestPage() {
     };
 
 
-    useEffect(() => {
-        generateTest();
-    }, [generateTest]);
+    // useEffect(() => {
+    //     generateTest();
+    // }, [generateTest]);
 
     // Timer countdown.
     useEffect(() => {
