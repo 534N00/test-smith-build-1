@@ -7,7 +7,7 @@ import ErrorPopup from '@/src/components/ErrorPopup';
 import { useRouter } from 'next/navigation';
 import CheckIfLoading from '@components/CheckIfLoading';
 import { useTestStore } from '../../src/stores/testStore';
-import { Test } from '@util/test/types';
+// import { Test } from '@util/test/types';
 
 
 interface UploadedFile {
@@ -52,7 +52,7 @@ export default function Page() {
             'image/webp',
             'image/svg+xml'
         ]);
-        const allowedExtensions = new Set(['pdf','txt','md','markdown','xlsx','docx','pptx','png','jpg','jpeg','webp','svg']);
+        const allowedExtensions = new Set(['pdf','txt','md','markdown','xlsx','docx', 'ppt', 'pptx','png','jpg','jpeg','webp','svg']);
         const isAllowed = (file: File) => {
             if (file.type && allowedMimeTypes.has(file.type)) { 
                 return true;
@@ -127,6 +127,8 @@ export default function Page() {
                 router.push('/test');
             } else {
                 // No error handling for simulation.
+                setLoading(false);
+                setErrors(["Error generating test. Please try again with a different set of files."]);
             }
         } catch {
             setLoading(false);

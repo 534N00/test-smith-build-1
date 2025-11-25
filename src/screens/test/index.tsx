@@ -16,42 +16,19 @@ import TestQuestion from "./Question";
 import { Test } from "@util/test/types";
 import { sleep } from "@util/sleep";
 import { useTestStore } from "../../stores/testStore";
+import ErrorPopup from "@/src/components/ErrorPopup";
 
 
 
 export default function TestPage() {
     const [loading, setLoading] = useState<boolean>(false);
+    const [errors, setErrors] = useState<string[] | null>(null);
     const test = useTestStore((state) => state.test);
     const [timeRemaining, setTimeRemaining] = useState<number | null>(test ? test.timeLimit : null);
     const [isPaused, setIsPaused] = useState<boolean>(false);
     const [userAnswers, setUserAnswers] = useState<Record<number, any>>({});
     const [review, setReview] = useState<boolean>(false); // For after user submits, reivew the responses.
 
-
-    // const generateTest = useCallback(async () => {
-    //     try {
-    //         setLoading(true);
-
-    //         const res = await fetch("/api/test/generate", {
-    //             method: "GET"
-    //         });
-
-    //         if (res.ok) {
-    //             const data = await res.json();
-    //             setTest(data.test);
-
-    //             if (data.test.timeLimit) {
-    //                 setTimeRemaining(data.test.timeLimit);
-    //             }
-    //         } else {
-    //             // No error handling for simulated data.
-    //         }
-    //     } catch {
-    //     } finally {
-    //         setLoading(false);
-    //     }
-    // }, []);
-   
 
     const formatTime = (seconds: number): string => {
         const hours = Math.floor(seconds / 3600);
@@ -65,19 +42,17 @@ export default function TestPage() {
             ...prev,
             [questionIndex]: answer
         }));
-        console.log(JSON.stringify(userAnswers));
-    }, [setUserAnswers, userAnswers]);
+        // console.log(JSON.stringify(userAnswers));
+    }, [setUserAnswers]);
 
     const handleSubmit = async () => {
         // Check if all questions answered
-        const keySet = new Set(Object.keys(userAnswers)); // check if thisng;sg
-        
-        if (keySet.size !== test?.questions.length) { // TODO: make thi not just an alert but use error modal
-            alert("Please answer all questions before submitting.");
+        const keySet = new Set(Object.keys(userAnswers));
+        if (keySet.size !== test?.questions.length) {
+            setErrors(["Please answer all questions before submitting."]);
             return;
         }
 
-        
         console.log("Submitting answers:", userAnswers);
         setIsPaused(true);
 
@@ -126,6 +101,7 @@ export default function TestPage() {
                 {test && (
                     <>
                         <div className="bg-white border-b border-gray-200">
+                            <ErrorPopup messages={errors} onClose={() => setErrors(null)} />
                             <div className="max-w-4xl mx-auto px-8 py-4 relative flex items-center justify-center">
                                 <h1 className="text-2xl font-semibold text-gray-900">
                                     {test.title}
