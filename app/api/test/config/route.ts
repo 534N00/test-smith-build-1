@@ -2,7 +2,9 @@ import { NextRequest, NextResponse } from "next/server";
 // import { sleep } from "@util/sleep";
 import { Test, Question } from "@util/test/types";
 import { test1 } from "@util/test/test1";
-import { romanBank } from "../../../../src/banks/romanBank";
+import { romanBank } from "@/src/banks/romanBank";
+
+import { getQuestionsFromFiles, getRecognizedFiles } from "@util/test/config/parse";
 
 
 
@@ -28,8 +30,18 @@ export async function POST(req: NextRequest) {
         console.log("Time Limit:", timeLimit);
         console.log("Question Types:", questionTypes);
 
+        const recognizedFiles = getRecognizedFiles(files);
+        
+        if (recognizedFiles.length !== 0) {
+            console.log("Recognized files have been uploaded, using questions from test banks.");
+            const test = getQuestionsFromFiles(config, recognizedFiles);
+            return NextResponse.json({ msg: "Success.", test }, { status: 200 });
+        }
+
+        console.log("All filed uploaded are unrecognized. Choosing predetermined Roman history test for now.");
+
         const historyTest: Test = {
-            title: romanBank.testTitle, // !! Static for now
+            title: romanBank.testTitle,
             timeLimit: timeLimit*60,
             questions: []
         };

@@ -49,3 +49,15 @@ export type Test = {
     timeLimit: number | null; // Seconds, or null if none.
     questions: Question[];
 };
+
+
+
+// Not the test itself. Used for grabbing questions from config to make a test.
+export type TestBank = {
+    topic: string;
+    freeResponse: FreeResponseQuestion[];
+    multipleChoice: MultipleChoiceQuestion[];
+    selectAll: SelectAllQuestion[];
+    sentenceCompletion: SentenceCompletionQuestion [];
+    trueFalse: TrueFalseQuestion[];
+}
