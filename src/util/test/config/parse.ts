@@ -30,7 +30,6 @@ export type KnownFileQuestions = {
 
 
 const KNOWN_FILES_TO_QUESTIONS: Record<string, KnownFileQuestions> = {
-
     "15_roman-food-hannah.pptx" : romanFoodBank,
     "1109-313-Roman_Culture.pdf" : romanCultureBank,
     "Dr-Anitha-V-Roman-Political-System.pdf" : romanPoliticsBank,
@@ -69,7 +68,7 @@ export const getRecognizedFiles = (files: File[]) => {
 
 
 // This will only be called if files is not length 0. The files are from getRecognizedFiles, so all will be recognized.
-export const getQuestionsFromFiles = (config: TestConfig, files: string[]): Test => {
+export const getTestFromFiles = (config: TestConfig, files: string[]): Test => {
     const questionsPerRecognizedFile = Math.floor(config.numQuestions / files.length);
     const remainder = config.numQuestions % files.length;
 
