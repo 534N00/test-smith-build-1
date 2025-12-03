@@ -1,14 +1,20 @@
 'use client';
 
 import { useState } from 'react';
+
 import { Upload, FileText } from 'lucide-react';
-import Button from '@components/Button';
-import ErrorPopup from '@/src/components/ErrorPopup';
+
 import { useRouter } from 'next/navigation';
+
+import { useDropzone } from 'react-dropzone';
+
+import Button from '@components/Button';
+import ErrorPopup from '@components/ErrorPopup';
 import CheckIfLoading from '@components/CheckIfLoading';
-import { useTestStore } from '../../src/stores/testStore';
-import { useConfigStore } from '../../src/stores/configStore';
-// import { Test } from '@util/test/types';
+
+import { useTestStore } from '@stores/testStore';
+import { useConfigStore } from '@stores/configStore';
+
 
 
 interface UploadedFile {
@@ -32,61 +38,6 @@ export default function Page() {
     const setTimeLimit = useConfigStore((s) => s.setTimeLimit);
     const setQuestionTypes = useConfigStore((s) => s.setQuestionTypes);
 
-
-    const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const uploadedFiles = e.target.files;
-        if (!uploadedFiles) {
-            return;
-        }
-
-        // Static allowed filetypes
-        const allowedMimeTypes = new Set([
-            'application/pdf',
-            'text/plain',
-            'text/markdown',
-            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', // .xlsx
-            'application/vnd.openxmlformats-officedocument.wordprocessingml.document', // .docx
-            'application/vnd.openxmlformats-officedocument.presentationml.presentation', // .pptx
-            'image/png',
-            'image/jpeg',
-            'image/webp',
-            'image/svg+xml'
-        ]);
-        const allowedExtensions = new Set(['pdf','txt','md','markdown','xlsx','docx', 'ppt', 'pptx','png','jpg','jpeg','webp','svg']);
-        const isAllowed = (file: File) => {
-            if (file.type && allowedMimeTypes.has(file.type)) { 
-                return true;
-            }
-            const ext = file.name.split('.').pop()?.toLowerCase() ?? '';
-            return allowedExtensions.has(ext);
-        }
-
-        const filesArray = Array.from(uploadedFiles);
-        const accepted: UploadedFile[] = [];
-        const rejectedNames: string[] = [];
-
-        filesArray.forEach((file, index) => {
-            if (isAllowed(file)) {
-                accepted.push({
-                    id: Date.now().toString() + index,
-                    name: file.name
-                });
-            } else {
-                rejectedNames.push(file.name);
-            }
-        });
-        if (accepted.length > 0) {
-            setFiles([... (Array.isArray(files) ? files : []), ...accepted]);
-        }
-        // Mark errors for display
-        if (rejectedNames.length > 0) {
-            setErrors([`This file is not allowed: ${rejectedNames.join(', ')}`]);
-        } else {
-            // clear previous errors when all selected files are valid
-            setErrors(null);
-        }
-    };
-
     const removeFile = (id: string) => {
         setFiles(files.filter(file => file.id !== id));
     };
@@ -99,12 +50,13 @@ export default function Page() {
     };
 
     const onGenerateTest = async () => {
-        const errors = validateForm();
-        if (errors) {
-            setErrors(errors);
-            return;
-        }
         try {
+            const errors = validateForm();
+            if (errors) {
+                setErrors(errors);
+                return;
+            }
+
             setLoading(true);
             const body = JSON.stringify({
                 config: {
@@ -121,12 +73,10 @@ export default function Page() {
             });
 
             if (res.ok) {
-                // populate zustand store with data
                 const data = await res.json();
                 setTest(data.test);
                 router.push('/test');
             } else {
-                // No error handling for simulation.
                 setLoading(false);
                 setErrors(["Error generating test. Please try again with a different set of files."]);
             }
@@ -148,8 +98,40 @@ export default function Page() {
             errors.push("Please select at least one question type.");
         }
         return errors.length > 0 ? errors : null;
-    }
+    };
 
+
+    const onDrop = (acceptedFiles: File[]) => {
+        const newFiles: UploadedFile[] = acceptedFiles.map((file, index) => ({
+            id: Date.now().toString() + index,
+            name: file.name
+        }));
+        setFiles([...(Array.isArray(files) ? files : []), ...newFiles]);
+        setErrors(null);
+    };
+
+    const onDropRejected = (fileRejections: any[]) => {
+        const rejectedNames = fileRejections.map(rejection => rejection.file.name);
+        setErrors([`These files are not allowed: ${rejectedNames.join(', ')}`]);
+    };
+
+    const { getRootProps, getInputProps, isDragActive } = useDropzone({
+        onDrop,
+        onDropRejected,
+        accept: {
+            'application/pdf': ['.pdf'],
+            'text/plain': ['.txt'],
+            'text/markdown': ['.md', '.markdown'],
+            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': ['.xlsx'],
+            'application/vnd.openxmlformats-officedocument.wordprocessingml.document': ['.docx'],
+            'application/vnd.openxmlformats-officedocument.presentationml.presentation': ['.pptx', '.ppt'],
+            'image/png': ['.png'],
+            'image/jpeg': ['.jpg', '.jpeg'],
+            'image/webp': ['.webp'],
+            'image/svg+xml': ['.svg']
+        },
+        multiple: true
+    });
 
     return (
         <div className="min-h-screen bg-gray-50 p-8">
@@ -157,21 +139,19 @@ export default function Page() {
             <div className="max-w-4xl mx-auto">
                 <CheckIfLoading loading={loading}>
                     <div className="mb-6">
-                        <label
-                            htmlFor="file-upload"
-                            className="flex flex-col items-center justify-center w-full h-48 border-4 border-black bg-gray-200 cursor-pointer hover:bg-gray-300 transition"
-                            title="Click to upload your files"
+                        <div
+                            {...getRootProps()}
+                            className={`flex flex-col items-center justify-center w-full h-48 border-4 border-black cursor-pointer transition ${
+                                isDragActive ? 'bg-blue-300' : 'bg-gray-200 hover:bg-gray-300'
+                            }`}
                         >
+                            <input {...getInputProps()} />
                             <Upload className="w-16 h-16 mb-2" strokeWidth={3} />
-                            <span className="text-xl font-medium">Upload your files</span>
-                            <input
-                                id="file-upload"
-                                type="file"
-                                multiple
-                                className="hidden"
-                                onChange={handleFileUpload}
-                            />
-                        </label>
+                            <span className="text-xl font-medium">
+                                {isDragActive ? 'Drop files here' : 'Upload your files'}
+                            </span>
+                            <span className="text-sm text-gray-500 mt-1">or drag and drop</span>
+                        </div>
                         <p className="text-sm text-gray-400 ml-2">.pdf, .txt, .md, .xlsx, .docx, .pptx, .png, .jpg, .jpeg, .webp, .svg</p>
                     </div>
 

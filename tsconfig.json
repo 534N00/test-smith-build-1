@@ -22,6 +22,7 @@
       "@/*": ["./*"],
       "@screens/*": ["./src/screens/*"],
       "@components/*": ["./src/components/*"],
+      "@stores/*": ["./src/stores/*"],
       "@util/*": ["./src/util/*"]
     }
   },

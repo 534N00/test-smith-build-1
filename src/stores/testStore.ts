@@ -21,7 +21,7 @@ export const useTestStore = create<TestState>()(
             name: 'test-store',
             partialize: (state) => ({ 
                 test: state.test,
-                testTime: state.testTime
+                testTime: state.test?.timeLimit
             })
         }
     )
