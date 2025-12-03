@@ -1,10 +1,55 @@
+'use client';
 import Button from "@components/Button";
 import Image from "next/image";
 import Link from "next/link";
+import { useConfigStore } from "@/src/stores/configStore";
+import { useTestStore } from "@/src/stores/testStore";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import CheckIfLoading from "@/src/components/CheckIfLoading";
 const Page = () => {
+    const [loading, setLoading] = useState<boolean>(false);
+    const files = useConfigStore((state) => state.files);
+    const numQuestions = useConfigStore((state) => state.numQuestions);
+    const timeLimit = useConfigStore((state) => state.timeLimit);
+    const questionTypes = useConfigStore((state) => state.questionTypes);
+    const setTest = useTestStore((state) => state.setTest);
+    const router = useRouter();
 
+    const onGenerateTest = async () => {
+        try {
+            setLoading(true);
+            const body = JSON.stringify({
+                config: {
+                    files,
+                    numQuestions,
+                    timeLimit,
+                    questionTypes
+                }
+            });
+
+            const res = await fetch("/api/test/config", {
+                method: "POST",
+                body
+            });
+
+            if (res.ok) {
+                // populate zustand store with data
+                const data = await res.json();
+                setTest(data.test);
+                router.push('/test');
+            } else {
+                // No error handling for simulation.
+                setLoading(false);
+                console.log("Error generating test.");
+            }
+        } catch {
+            setLoading(false);
+        }
+    };
 
     return (
+        <CheckIfLoading loading={loading}>
         <div className="min-h-screen -mt-12 bg-gray-50 flex flex-col items-center justify-center">
             <div className="flex space-x-32 mb-8">
                 <Image src="/culture.svg" alt="Fox" width={200} height={200} />
@@ -21,10 +66,11 @@ const Page = () => {
                 </p>
             </div>
             <div className="flex space-x-56">
-                <Link href="/test"><Button onClick={() => {console.log("generate another quiz click")}}>Do another</Button></Link>
+                <Link href="/test"><Button onClick={onGenerateTest}>Do another</Button></Link>
                 <Link href="/config"><Button>Change Settings</Button></Link>
             </div>
         </div>
+        </CheckIfLoading>
     );
 };
 export default Page;

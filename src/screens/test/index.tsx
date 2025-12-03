@@ -29,7 +29,7 @@ export default function TestPage() {
     const [userAnswers, setUserAnswers] = useState<Record<number, any>>({});
     const [review, setReview] = useState<boolean>(false); // For after user submits, reivew the responses.
 
-
+    
     const formatTime = (seconds: number): string => {
         const hours = Math.floor(seconds / 3600);
         const minutes = Math.floor((seconds % 3600) / 60);
@@ -67,11 +67,8 @@ export default function TestPage() {
         // move to more ai reviews/results
         
     };
-
-
-    // useEffect(() => {
-    //     generateTest();
-    // }, [generateTest]);
+    
+    useEffect(() => { setTimeRemaining(test?.timeLimit ? test.timeLimit : null); }, [test]);
 
     // Timer countdown.
     useEffect(() => {
@@ -93,7 +90,6 @@ export default function TestPage() {
             handleSubmit();
         }
     }, [timeRemaining, review]);
-
 
     return (
         <div className="min-h-screen bg-gray-50">

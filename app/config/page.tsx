@@ -7,6 +7,7 @@ import ErrorPopup from '@/src/components/ErrorPopup';
 import { useRouter } from 'next/navigation';
 import CheckIfLoading from '@components/CheckIfLoading';
 import { useTestStore } from '../../src/stores/testStore';
+import { useConfigStore } from '../../src/stores/configStore';
 // import { Test } from '@util/test/types';
 
 
@@ -20,17 +21,16 @@ export default function Page() {
 
     const [errors, setErrors] = useState<string[] | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
-    const [files, setFiles] = useState<UploadedFile[]>([]); // local list of selected files (no upload to server)
-    const [numQuestions, setNumQuestions] = useState(10); // number of questions to generate
-    const [timeLimit, setTimeLimit] = useState<number>(20); // time limit in minutes?
-    const [questionTypes, setQuestionTypes] = useState({ // multi-select state
-        multipleChoice: false,
-        freeResponse: false,
-        trueFalse: false,
-        sentenceCompletion: false,
-        selection: false
-    });
+   
     const setTest = useTestStore((s) => s.setTest); // zustand store for test
+    const files = useConfigStore((s) => s.files);
+    const numQuestions = useConfigStore((s) => s.numQuestions);
+    const timeLimit = useConfigStore((s) => s.timeLimit);
+    const questionTypes = useConfigStore((s) => s.questionTypes);
+    const setFiles = useConfigStore((s) => s.setFiles);
+    const setNumQuestions = useConfigStore((s) => s.setNumQuestions);
+    const setTimeLimit = useConfigStore((s) => s.setTimeLimit);
+    const setQuestionTypes = useConfigStore((s) => s.setQuestionTypes);
 
 
     const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -76,7 +76,7 @@ export default function Page() {
             }
         });
         if (accepted.length > 0) {
-            setFiles(prev => [...prev, ...accepted]);
+            setFiles([... (Array.isArray(files) ? files : []), ...accepted]);
         }
         // Mark errors for display
         if (rejectedNames.length > 0) {

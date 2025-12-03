@@ -31,7 +31,8 @@ export default function TestQuestion({
     }, [questionIndex, handleAnswerChange]);
 
     const isCorrect = isCorrectAnswer(question, userAnswers[questionIndex]);
-    const bgColor = review ? (isCorrect ? "bg-green-400" : "bg-red-400" ) : "bg-gray-400";
+    // Yellow if partial, green if correct, red if incorrect
+    const bgColor = review ? (isCorrect ? (typeof isCorrect === "string" ? "bg-yellow-400" : "bg-green-400") : "bg-red-400" ) : "bg-gray-400";
 
     const renderItem = useCallback(() => {
         const userAnswer = userAnswers[questionIndex];
@@ -145,24 +146,30 @@ function ReviewAnswer({ question, userAnswer, bgColor }: ReviewAnswerProps) {
 
 
 
-const isCorrectAnswer = (question: Question, userAnswer: any): boolean => {
+const isCorrectAnswer = (question: Question, userAnswer: any): boolean | "part" => {
+    if (userAnswer === undefined) { return false; }
     switch (question.type) {
         case "free-response":
-            return question.correct;
-
+            const terms = new Set(question.correctTerms.flatMap(t => t.toLowerCase().split(" "))); // split two-word terms into separate terms
+            const words = userAnswer.toLowerCase().split(/\W+/); // split on non-words chars
+            const count = words.filter((w: string) => terms.has(w)).length;
+            if (count < terms.size/3) { return false; }
+            if (count < terms.size*3/4) { return "part"; } // partial correctness if between 1/3 and 3/4 of terms are found.
+            return true; 
         case "multiple-choice":
             return userAnswer == question.answer;
 
         case "select-all":
-            if (!userAnswer) return false;
-            const sortedUserAnswer = [...userAnswer].sort((a, b) => a - b);
-            const sortedCorrectAnswer = [...question.answers].sort((a, b) => a - b);
-            if (sortedUserAnswer.length !== sortedCorrectAnswer.length) return false;
-            return sortedUserAnswer.every((val, index) => val === sortedCorrectAnswer[index]);
-
+            if (!userAnswer) { return false; }
+            const userAnswerSet = new Set(userAnswer);
+            const correctAnswerSet = new Set(question.answers);
+            const setIntersection = correctAnswerSet.intersection(userAnswerSet);
+            // Partial correctness if most of the answers in selected are correct ones
+            if (setIntersection.size === correctAnswerSet.size && setIntersection.size === userAnswerSet.size) { return true; }
+            if (correctAnswerSet.size/userAnswerSet.size > 0.5) { return "part"; }
+            return false;
         case "sentence-completion":
             return userAnswer == question.answer;
-
         case "true-false":
             return userAnswer == question.answer;
     }
