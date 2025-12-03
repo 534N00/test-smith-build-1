@@ -1,5 +1,7 @@
 import { TestBank } from "../util/test/types";
 
+
+
 export const romanPoliticsBank: TestBank = {
     topic: 'Roman Politics',
     multipleChoice: [
@@ -15,7 +17,7 @@ export const romanPoliticsBank: TestBank = {
             answer: 1,
             aiResponses: [
                 "No, religion was not the primary issue mentioned.",
-                "Correct! Tarquin the Proud was described as a very harsh tyrant, which led to his overthrow.",
+                "Correct! Tarquin the Proud was described as a very harsh tyrant, which led to his overthrow [Dr Anitha, pg. 2].",
                 "No, there is no mention of such an invitation.",
                 "The Senate continued to exist; this was not the cause of his removal."
             ]
@@ -31,7 +33,7 @@ export const romanPoliticsBank: TestBank = {
             ],
             answer: 0,
             aiResponses: [
-                "Correct! The executive branch consisted of consuls and various magistrates.",
+                "Correct! The executive branch consisted of consuls and various magistrates [Dr Anitha, pg. 3].",
                 "No, these groups were part of the legislative branch.",
                 "The Plebeian Council belonged to the legislative/judicial sphere.",
                 "The Assembly of the Centuries was a legislative voting body, not executive."
@@ -50,7 +52,7 @@ export const romanPoliticsBank: TestBank = {
             aiResponses: [
                 "No, the Curia assembly was an early foundational assembly.",
                 "No, the Centuries assembly represented soldiers of various wealth classes.",
-                "Correct! The Plebeian Council allowed commoners to pass laws and elect magistrates.",
+                "Correct! The Plebeian Council allowed commoners to pass laws and elect magistrates [Dr Anitha, pg. 5].",
                 "The Senate advised and administered but was not the plebeian law-making body."
             ]
         },
@@ -66,7 +68,7 @@ export const romanPoliticsBank: TestBank = {
             answer: 1,
             aiResponses: [
                 "That was Babylonian, not Roman.",
-                "Correct! The Twelve Tables were Rome’s first codified laws, created around 450 BCE.",
+                "Correct! The Twelve Tables were Rome’s first codified laws, created around 450 BCE [Dr Anitha, pg. 8].",
                 "The Justinian Code was created much later during the Byzantine Empire.",
                 "Lex Hortensia was a significant law but not the earliest written legal code."
             ]
@@ -85,7 +87,7 @@ export const romanPoliticsBank: TestBank = {
                 "Caesar’s rule came earlier; Augustus established the long peace that followed.",
                 "Tarquin was an early king, not the founder of Pax Romana.",
                 "Marius was a military commander, not the emperor who stabilized Rome.",
-                "Correct! Augustus created a stable imperial system and began the Pax Romana."
+                "Correct! Augustus created a stable imperial system and began the Pax Romana [Dr Anitha, pg. 14]."
             ]
         }
     ],
@@ -95,36 +97,33 @@ export const romanPoliticsBank: TestBank = {
             type: "free-response",
             question: "Describe the structure of the Roman Republic and how power was balanced among branches.",
             correctTerms: ["executive", "legislative", "judicial", "consuls", "senate", "assemblies", "courts"],
-            aiResponse:
-                "A strong answer would mention the three-branch system: the executive (consuls and magistrates), legislative (Senate and assemblies), and judicial (councils and courts), designed to prevent any one man from holding too much power."
+            aiResponse: "A strong answer would mention the three-branch system: the executive (consuls and magistrates), legislative (Senate and assemblies), and judicial (councils and courts), designed to prevent any one man from holding too much power [Dr Anitha, pg. 3-6]."
         },
         {
             type: "free-response",
             question: "Explain the role and power of the consuls in the Roman political system.",
             correctTerms: ["consuls", "one year", "veto", "army", "executive", "command"],
-            aiResponse:
-                "Consuls were the top executive officials elected for one year. They supervised the Senate, commanded the army, and each held veto power over the other."
+            aiResponse: "Consuls were the top executive officials elected for one year. They supervised the Senate, commanded the army, and each held veto power over the other [Dr Anitha, pg. 4-5]."
         },
         {
             type: "free-response",
             question: "Summarize key problems that led to the fall of the Roman Republic.",
             correctTerms: ["wealth", "elite", "landless", "civil war", "marius", "sulla", "senate", "plebeians"],
-            aiResponse:
-                "A good answer would mention wealth concentration among elites, displacement of farmers, rising landless citizens, conflict between Senate and Plebeians, and civil wars led by commanders like Marius and Sulla."
+            aiResponse: "A good answer would mention wealth concentration among elites, displacement of farmers, rising landless citizens, conflict between Senate and Plebeians, and civil wars led by commanders like Marius and Sulla [Dr Anitha, pg. 11-13]."
         },
         {
             type: "free-response",
             question: "What reforms did Julius Caesar implement during his dictatorship?",
             correctTerms: ["reforms", "debt", "citizenship", "land", "veterans", "building", "entertainment"],
             aiResponse:
-                "Caesar relieved debt, redistributed land to veterans, extended citizenship to provincial people, and funded building and entertainment projects to stabilize Rome."
+                "Caesar relieved debt, redistributed land to veterans, extended citizenship to provincial people, and funded building and entertainment projects to stabilize Rome [Dr Anitha, pg. 13]."
         },
         {
             type: "free-response",
             question: "Describe how emperors under the principate system combined different kinds of authority.",
             correctTerms: ["princeps", "imperium", "proconsulare", "maiis", "religious", "consul", "power"],
             aiResponse:
-                "An accurate answer would explain that emperors were called princeps and held combined powers: executive authority of the consul, religious authority of the high priest, and absolute provincial command through imperium proconsulare and imperium proconsulare maius."
+                "An accurate answer would explain that emperors were called princeps and held combined powers: executive authority of the consul, religious authority of the high priest, and absolute provincial command through imperium proconsulare and imperium proconsulare maius [Dr Anitha, pg. 15-16]."
         }
     ],
 
@@ -133,35 +132,31 @@ export const romanPoliticsBank: TestBank = {
             type: "true-false",
             question: "In the Roman Republic, each consul could veto the actions of the other.",
             answer: "true",
-            aiResponse: "True. This ensured that no single consul held unchecked power."
+            aiResponse: "True. This ensured that no single consul held unchecked power [Dr Anitha, pg. 4]."
         },
         {
             type: "true-false",
             question: "The Senate in the Republic had complete legislative authority and passed all major laws.",
             answer: "false",
-            aiResponse:
-                "False. The Senate advised and controlled finances and foreign relations but had limited legislative authority."
+            aiResponse: "False. The Senate advised and controlled finances and foreign relations but had limited legislative authority [Dr Anitha, pg. 6]."
         },
         {
             type: "true-false",
             question: "The Twelve Tables were the first written codification of Roman law.",
             answer: "true",
-            aiResponse:
-                "True. The Twelve Tables were Rome’s foundational legal code, inscribed around 450 BCE."
+            aiResponse: "True. The Twelve Tables were Rome’s foundational legal code, inscribed around 450 BCE [Dr Anitha, pg. 8]."
         },
         {
             type: "true-false",
             question: "Gaius Marius and Sulla fought on the same side during the Roman civil wars.",
             answer: "false",
-            aiResponse:
-                "False. They led opposing factions—Marius for plebeian interests and Sulla for patrician dominance."
+            aiResponse: "False. They led opposing factions—Marius for plebeian interests and Sulla for patrician dominance [Dr Anitha, pg. 12]."
         },
         {
             type: "true-false",
             question: "Augustus restored the Republic fully and surrendered his powers after stabilizing Rome.",
             answer: "false",
-            aiResponse:
-                "False. He preserved the appearance of a republic but concentrated ultimate authority in himself."
+            aiResponse: "False. He preserved the appearance of a republic but concentrated ultimate authority in himself [Dr Anitha, pg. 14-15]."
         }
     ],
 
@@ -170,31 +165,31 @@ export const romanPoliticsBank: TestBank = {
             type: "sentence-completion",
             question: "The two top executives of the Roman Republic were the ________.",
             answer: "consuls",
-            aiResponse: "The correct term is 'consuls'."
+            aiResponse: "The correct term is 'consuls' [Dr Anitha, pg. 4]."
         },
         {
             type: "sentence-completion",
             question: "Rome’s first written legal code was known as the Twelve ________.",
             answer: "Tables",
-            aiResponse: "This refers to the Twelve Tables."
+            aiResponse: "This refers to the Twelve Tables [Dr Anitha, pg. 8]."
         },
         {
             type: "sentence-completion",
             question: "Julius Caesar extended Roman ________ to people in conquered provinces.",
             answer: "citizenship",
-            aiResponse: "He broadened Roman citizenship as part of his reforms."
+            aiResponse: "He broadened Roman citizenship as part of his reforms [Dr Anitha, pg. 13]."
         },
         {
             type: "sentence-completion",
             question: "Augustus established a long period of stability called the Pax ________.",
             answer: "Romana",
-            aiResponse: "This refers to the Pax Romana."
+            aiResponse: "This refers to the Pax Romana [Dr Anitha, pg. 14]."
         },
         {
             type: "sentence-completion",
             question: "Under the principate, the emperor held both executive and ________ authority.",
             answer: "religious",
-            aiResponse: "He held religious authority as high priest."
+            aiResponse: "He held religious authority as high priest [Dr Anitha, pg. 15]."
         }
     ],
 
@@ -211,10 +206,10 @@ export const romanPoliticsBank: TestBank = {
             ],
             answers: [0, 1, 2, 3],
             aiResponses: [
-                "✅ Part of the legislative/advisory structure.",
-                "✅ One of the earliest assemblies.",
-                "✅ The Army Assembly, part of Rome’s legislative system.",
-                "✅ A democratic assembly of Roman citizens.",
+                "✅ Part of the legislative/advisory structure [Dr Anitha, pg. 6].",
+                "✅ One of the earliest assemblies [Dr Anitha, pg. 5].",
+                "✅ The Army Assembly, part of Rome’s legislative system [Dr Anitha, pg. 5].",
+                "✅ A democratic assembly of Roman citizens [Dr Anitha, pg. 5].",
                 "❌ Consuls were executive officials, not legislators."
             ]
         },
@@ -230,11 +225,11 @@ export const romanPoliticsBank: TestBank = {
             ],
             answers: [0, 1, 2, 4],
             aiResponses: [
-                "✅ Wealth inequality was a major factor.",
-                "✅ Many poor farmers lost land and became landless.",
-                "✅ Commanders like Marius and Sulla escalated conflicts into civil war.",
+                "✅ Wealth inequality was a major factor [Dr Anitha, pg. 11].",
+                "✅ Many poor farmers lost land and became landless [Dr Anitha, pg. 11].",
+                "✅ Commanders like Marius and Sulla escalated conflicts into civil war [Dr Anitha, pg. 12].",
                 "❌ There was growing conflict, not cooperation.",
-                "✅ Debt problems destabilized social and political structures."
+                "✅ Debt problems destabilized social and political structures [Dr Anitha, pg. 11]."
             ]
         },
         {
@@ -249,11 +244,11 @@ export const romanPoliticsBank: TestBank = {
             ],
             answers: [0, 1, 2, 4],
             aiResponses: [
-                "✅ Caesar relieved debt during his rule.",
-                "✅ He granted land to his veterans.",
-                "✅ He extended Roman citizenship to people in conquered provinces.",
+                "✅ Caesar relieved debt during his rule [Dr Anitha, pg. 13].",
+                "✅ He granted land to his veterans [Dr Anitha, pg. 13].",
+                "✅ He extended Roman citizenship to people in conquered provinces [Dr Anitha, pg. 13].",
                 "❌ The Pax Romana was begun by Augustus, not Caesar.",
-                "✅ He funded public buildings and entertainment to stabilize Rome."
+                "✅ He funded public buildings and entertainment to stabilize Rome [Dr Anitha, pg. 13]."
             ]
         }
     ]

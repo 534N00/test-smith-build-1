@@ -1,5 +1,7 @@
 import { TestBank } from "../util/test/types";
 
+
+
 export const romanCultureBank: TestBank = {
     topic: 'Roman Culture',
     multipleChoice: [
@@ -15,7 +17,7 @@ export const romanCultureBank: TestBank = {
             answer: 1,
             aiResponses: [
                 "No, political meetings were held elsewhere, not mainly in the Colosseum.",
-                "Correct! It hosted gladiator combats, animal hunts (venationes), and mock naval battles (naumachiae).",
+                "Correct! It hosted gladiator combats, animal hunts (venationes), and mock naval battles (naumachiae) [Roman Culture, pg. 1].",
                 "Religious processions could occur in Rome, but this was not the Colosseum’s primary role.",
                 "Markets were held in other public spaces, not as the main purpose of the Colosseum."
             ]
@@ -31,7 +33,7 @@ export const romanCultureBank: TestBank = {
             ],
             answer: 0,
             aiResponses: [
-                "Correct! Gladiators were trained in ludi (singular: ludus) before appearing in the arena.",
+                "Correct! Gladiators were trained in ludi (singular: ludus) before appearing in the arena [Roman Culture, pg. 1].",
                 "No, gladiator training was formalized in special schools, not senators’ homes.",
                 "Legions trained soldiers, not professional gladiators.",
                 "Baths were for washing and socializing, not for systematic gladiator training."
@@ -49,7 +51,7 @@ export const romanCultureBank: TestBank = {
             answer: 1,
             aiResponses: [
                 "Moving armies was the function of Roman roads, not aqueducts.",
-                "Correct! Aqueducts carried water over many miles to supply cities with relatively safe drinking water and water for latrines.",
+                "Correct! Aqueducts carried water over many miles to supply cities with relatively safe drinking water and water for latrines [Roman Culture, pg. 2].",
                 "Defensive walls were different structures; aqueducts transported water.",
                 "While aqueducts were impressive, their primary role was practical, not for displaying statues."
             ]
@@ -66,7 +68,7 @@ export const romanCultureBank: TestBank = {
             answer: 1,
             aiResponses: [
                 "Merchants used the roads, but their main strategic purpose was something else.",
-                "Correct! Viae acted as the veins and arteries of the Roman military system, letting armies march from the Euphrates to the Atlantic.",
+                "Correct! Viae acted as the veins and arteries of the Roman military system, letting armies march from the Euphrates to the Atlantic [Roman Culture, pg. 2].",
                 "They were not built specifically for keeping animals out.",
                 "Roads connected regions, not social classes, within the city."
             ]
@@ -84,7 +86,7 @@ export const romanCultureBank: TestBank = {
             aiResponses: [
                 "They were not primarily personal confessors in the later sense.",
                 "Healing the sick by miracle was not their main defined role.",
-                "Correct! They were administrative officials charged with performing rituals with scrupulous care to maintain the gods’ goodwill.",
+                "Correct! They were administrative officials charged with performing rituals with scrupulous care to maintain the gods’ goodwill [Roman Culture, pg. 2].",
                 "Military command belonged to magistrates and generals, not priests in general."
             ]
         }
@@ -95,36 +97,31 @@ export const romanCultureBank: TestBank = {
             type: "free-response",
             question: "Explain how the Romans borrowed from Greek culture and then spread their own culture across the Empire.",
             correctTerms: ["greeks", "etruscans", "borrow", "adapt", "spread", "empire"],
-            aiResponse:
-                "A strong answer would mention that early Romans adopted cultural elements from their neighbors, especially Greeks and Etruscans, then adapted them with a distinct Roman stamp and spread this Romanized culture throughout the Empire."
+            aiResponse: "A strong answer would mention that early Romans adopted cultural elements from their neighbors, especially Greeks and Etruscans, then adapted them with a distinct Roman stamp and spread this Romanized culture throughout the Empire [Roman Culture, pg. 1]."
         },
         {
             type: "free-response",
             question: "Describe the main features and purposes of Roman aqueducts and sewers.",
             correctTerms: ["aqueducts", "water", "latrines", "sewers", "cloaca maxima", "tiber"],
-            aiResponse:
-                "A good answer would say that Roman aqueducts carried water for many miles to supply cities with potable water and latrines, and that sewers like the Cloaca Maxima drained waste into the Tiber River."
+            aiResponse: "A good answer would say that Roman aqueducts carried water for many miles to supply cities with potable water and latrines, and that sewers like the Cloaca Maxima drained waste into the Tiber River [Roman Culture, pg. 2]."
         },
         {
             type: "free-response",
             question: "What was the Pantheon, and what was distinctive about its construction?",
             correctTerms: ["pantheon", "all gods", "temple", "dome", "rotunda", "portico", "columns"],
-            aiResponse:
-                "An effective answer would note that the Pantheon was a temple for all the gods, featuring a huge domed brick-faced concrete rotunda and a rectangular Corinthian portico with granite columns."
+            aiResponse: "An effective answer would note that the Pantheon was a temple for all the gods, featuring a huge domed brick-faced concrete rotunda and a rectangular Corinthian portico with granite columns [Roman Culture, pg. 2]."
         },
         {
             type: "free-response",
             question: "Summarize Roman beliefs and practices surrounding burial and the journey to the land of the dead.",
             correctTerms: ["washed", "laid out", "coin", "charon", "ferryman", "eight days", "burial"],
-            aiResponse:
-                "A strong response would explain that the dead person was washed, dressed in fine clothes, laid out for about eight days, and given a coin on the mouth, under the tongue, or on the eyes to pay Charon the ferryman for passage to the land of the dead before being taken out for burial."
+            aiResponse: "A strong response would explain that the dead person was washed, dressed in fine clothes, laid out for about eight days, and given a coin on the mouth, under the tongue, or on the eyes to pay Charon the ferryman for passage to the land of the dead before being taken out for burial [Roman Culture, pg. 3]."
         },
         {
             type: "free-response",
             question: "How did Greek and Roman thinkers contribute to medicine and philosophy?",
             correctTerms: ["medicine", "regimen", "diet", "exercise", "observation", "stoicism", "epicureanism", "ethics"],
-            aiResponse:
-                "A good answer would mention that Greek and Roman medicine moved from magic-based practices toward regimens involving diet, exercise, observation, and diagnosis, and that philosophies like Stoicism and Epicureanism focused on ethics, virtue, and quality of life."
+            aiResponse: "A good answer would mention that Greek and Roman medicine moved from magic-based practices toward regimens involving diet, exercise, observation, and diagnosis, and that philosophies like Stoicism and Epicureanism focused on ethics, virtue, and quality of life [Roman Culture, pg. 3]."
         }
     ],
 
@@ -133,31 +130,31 @@ export const romanCultureBank: TestBank = {
             type: "true-false",
             question: "Roman theater combined translated Greek plays with native Italian song, dance, farce, and improv.",
             answer: "true",
-            aiResponse: "True. Roman theater began as Greek material mixed with local song, dance, farce, and improvisation."
+            aiResponse: "True. Roman theater began as Greek material mixed with local song, dance, farce, and improvisation [Roman Culture, pg. 1]."
         },
         {
             type: "true-false",
             question: "Roman gladiators usually fought only mock battles and were rarely in serious danger.",
             answer: "false",
-            aiResponse: "False. Gladiators fought in violent contests, often to the death, to entertain crowds."
+            aiResponse: "False. Gladiators fought in violent contests, often to the death, to entertain crowds [Roman Culture, pg. 1]."
         },
         {
             type: "true-false",
             question: "Latrines in ancient Rome could seat many people at once and offered little privacy.",
             answer: "true",
-            aiResponse: "True. Latrines sometimes served 12–60 people at once and had no dividers or toilet paper."
+            aiResponse: "True. Latrines sometimes served 12–60 people at once and had no dividers or toilet paper [Roman Culture, pg. 2]."
         },
         {
             type: "true-false",
             question: "Most Roman and Greek gods are entirely different figures with no overlapping traits.",
             answer: "false",
-            aiResponse: "False. Many Roman and Greek gods share similar attributes and are roughly the same deities with different names."
+            aiResponse: "False. Many Roman and Greek gods share similar attributes and are roughly the same deities with different names [Roman Culture, pg. 2]."
         },
         {
             type: "true-false",
             question: "In Roman marriage, parents sometimes arranged matches to form political alliances and secure descendants.",
             answer: "true",
-            aiResponse: "True. Marriages could create alliances that helped political careers and ensured descendants to tend ancestral spirits."
+            aiResponse: "True. Marriages could create alliances that helped political careers and ensured descendants to tend ancestral spirits [Roman Culture, pg. 3]."
         }
     ],
 
@@ -166,31 +163,31 @@ export const romanCultureBank: TestBank = {
             type: "sentence-completion",
             question: "The sandy floor that absorbed blood gave the Roman ________ its name.",
             answer: "arena",
-            aiResponse: "The correct word is 'arena', from harena, meaning sand."
+            aiResponse: "The correct word is 'arena', from harena, meaning sand [Roman Culture, pg. 1]."
         },
         {
             type: "sentence-completion",
             question: "The main sewer of Rome was called the Cloaca ________.",
             answer: "Maxima",
-            aiResponse: "It was known as the Cloaca Maxima, the great sewer that emptied into the Tiber."
+            aiResponse: "It was known as the Cloaca Maxima, the great sewer that emptied into the Tiber [Roman Culture, pg. 2]."
         },
         {
             type: "sentence-completion",
             question: "Roman roads, or ________, acted as the veins and arteries of the military system.",
             answer: "viae",
-            aiResponse: "The Latin word 'viae' refers to the network of Roman roads."
+            aiResponse: "The Latin word 'viae' refers to the network of Roman roads [Roman Culture, pg. 2]."
         },
         {
             type: "sentence-completion",
             question: "The Roman ________ was a temple dedicated to all the gods.",
             answer: "Pantheon",
-            aiResponse: "The missing word is 'Pantheon', meaning a temple for all gods."
+            aiResponse: "The missing word is 'Pantheon', meaning a temple for all gods [Roman Culture, pg. 2]."
         },
         {
             type: "sentence-completion",
             question: "Ethical schools like ________ and Epicureanism focused on virtue and quality of life.",
             answer: "Stoicism",
-            aiResponse: "The text mentions 'Stoicism' alongside Epicureanism as ethical philosophies."
+            aiResponse: "The text mentions 'Stoicism' alongside Epicureanism as ethical philosophies [Roman Culture, pg. 3]."
         }
     ],
 
@@ -208,11 +205,11 @@ export const romanCultureBank: TestBank = {
             ],
             answers: [0, 1, 3, 4],
             aiResponses: [
-                "✅ Aqueducts are highlighted as major engineering feats.",
-                "✅ The Cloaca Maxima is a famous Roman sewer.",
+                "✅ Aqueducts are highlighted as major engineering feats [Roman Culture, pg. 2].",
+                "✅ The Cloaca Maxima is a famous Roman sewer [Roman Culture, pg. 2].",
                 "❌ Pyramids are associated with Egypt, not Roman engineering here.",
-                "✅ The text notes that some Roman-built bridges still span rivers.",
-                "✅ Roman roads connected the Empire from the Euphrates to the Atlantic.",
+                "✅ The text notes that some Roman-built bridges still span rivers [Roman Culture, pg. 2].",
+                "✅ Roman roads connected the Empire from the Euphrates to the Atlantic [Roman Culture, pg. 2].",
                 "❌ Subways are a modern development, not part of ancient Roman culture."
             ]
         },
@@ -229,11 +226,11 @@ export const romanCultureBank: TestBank = {
             ],
             answers: [0, 1, 2, 4],
             aiResponses: [
-                "✅ The Pantheon is explicitly described as a temple for all gods.",
-                "✅ Priests are described as administrative officials who perform rituals with exactness.",
-                "✅ A coin was placed with the dead to pay Charon, the ferryman.",
+                "✅ The Pantheon is explicitly described as a temple for all gods [Roman Culture, pg. 2].",
+                "✅ Priests are described as administrative officials who perform rituals with exactness [Roman Culture, pg. 2].",
+                "✅ A coin was placed with the dead to pay Charon, the ferryman [Roman Culture, pg. 3].",
                 "❌ The focus is on proper ritual, not on tricking the gods.",
-                "✅ Many Roman and Greek gods shared attributes and were considered roughly the same.",
+                "✅ Many Roman and Greek gods shared attributes and were considered roughly the same [Roman Culture, pg. 2].",
                 "❌ The text does not say Romans totally rejected Greek myths."
             ]
         },
@@ -250,11 +247,11 @@ export const romanCultureBank: TestBank = {
             ],
             answers: [0, 1, 2, 4],
             aiResponses: [
-                "✅ Roman theater and satire contributed patterns still seen in modern entertainment.",
-                "✅ The text notes that distant cities are located along remnants of Roman roads and bridges.",
-                "✅ Greek and Roman medicine advanced practice from magic toward regimen, observation, and diagnosis.",
+                "✅ Roman theater and satire contributed patterns still seen in modern entertainment [Roman Culture, pg. 1].",
+                "✅ The text notes that distant cities are located along remnants of Roman roads and bridges [Roman Culture, pg. 1].",
+                "✅ Greek and Roman medicine advanced practice from magic toward regimen, observation, and diagnosis.[Roman Culture, pg. 3]",
                 "❌ Latin did not permanently replace every other European language.",
-                "✅ Roman architecture, including domes and temples like the Pantheon, influenced later structures.",
+                "✅ Roman architecture, including domes and temples like the Pantheon, influenced later structures [Roman Culture, pg. 2].",
                 "❌ Greek and Roman philosophies like Stoicism and Epicureanism had lasting influence."
             ]
         }
