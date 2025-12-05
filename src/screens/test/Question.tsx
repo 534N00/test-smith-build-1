@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 
 
-import { Question } from "@util/test/types";
+import { QuestionWithTopic } from "@util/test/types";
 
 import FreeResponse from "./questions/FreeResponse";
 import MultipleChoice from "./questions/MultipleChoice";
@@ -13,7 +13,7 @@ import TrueFalse from "./questions/TrueFalse";
 
 interface TestQuestionProps {
     questionIndex: number;
-    question: Question;
+    question: QuestionWithTopic;
     userAnswers: Record<number, any>;
     handleAnswerChange: (questionIndex: number, answer: any) => void;
     review: boolean;
@@ -32,7 +32,7 @@ export default function TestQuestion({
 
     const isCorrect = isCorrectAnswer(question, userAnswers[questionIndex]);
     // Yellow if partial, green if correct, red if incorrect
-    const bgColor = review ? (isCorrect ? (typeof isCorrect === "string" ? "bg-yellow-400" : "bg-green-400") : "bg-red-400" ) : "bg-gray-400";
+    const bgColor = review ? (isCorrect ? (typeof isCorrect === "string" ? "bg-yellow-400" : "bg-green-400") : "bg-red-400" ) : "bg-[#d4d4d4]";
 
     const renderItem = useCallback(() => {
         const userAnswer = userAnswers[questionIndex];
@@ -96,7 +96,7 @@ export default function TestQuestion({
     return (
         <div className="bg-gray-200 rounded-lg p-6 mb-4">
             <div className="flex items-center gap-4 mb-4">
-                <div className={`${bgColor} text-gray-700 rounded-full w-12 h-12 flex items-center justify-center shrink-0 text-lg font-medium`}>
+                <div className={`${bgColor} text-[gray-700] rounded-full w-12 h-12 flex items-center justify-center shrink-0 text-lg font-medium`}>
                     {questionIndex + 1}
                 </div>
                 
@@ -116,6 +116,12 @@ export default function TestQuestion({
                     />
                 }
             </div>
+
+            <div className="pt-3 flex justify-end">
+                <span className="bg-[#d4d4d4] text-sm font-medium px-3 py-1 rounded-full">
+                    {question.topic}
+                </span>
+            </div>
         </div>
     );
 }
@@ -123,7 +129,7 @@ export default function TestQuestion({
 
 
 interface ReviewAnswerProps {
-    question: Question;
+    question: QuestionWithTopic;
     userAnswer: any;
     bgColor: string;
 }
@@ -146,7 +152,7 @@ function ReviewAnswer({ question, userAnswer, bgColor }: ReviewAnswerProps) {
 
 
 
-const isCorrectAnswer = (question: Question, userAnswer: any): boolean | "part" => {
+const isCorrectAnswer = (question: QuestionWithTopic, userAnswer: any): boolean | "part" => {
     if (userAnswer === undefined) { return false; }
     switch (question.type) {
         case "free-response":
@@ -176,7 +182,7 @@ const isCorrectAnswer = (question: Question, userAnswer: any): boolean | "part" 
 }
 
 
-const getAiResponseText = (question: Question, userAnswer: any): string => {
+const getAiResponseText = (question: QuestionWithTopic, userAnswer: any): string => {
     switch (question.type) {
         case "free-response":
             return question.aiResponse;

@@ -43,11 +43,15 @@ export type Question =
 | SentenceCompletionQuestion
 | TrueFalseQuestion;
 
+export type QuestionWithTopic = Question & {
+    topic: string;
+};
+
 
 export type Test = {
     title: string;
     timeLimit: number | null; // Seconds, or null if none.
-    questions: Question[];
+    questions: QuestionWithTopic[];
 };
 
 

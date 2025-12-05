@@ -3,7 +3,7 @@ import { TestBank } from "../util/test/types";
 
 
 export const romanFoodBank: TestBank = {
-    topic: "Roman Food Bank",
+    topic: "Roman Food",
     multipleChoice: [
         {
             type: "multiple-choice",

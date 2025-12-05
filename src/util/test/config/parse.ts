@@ -1,12 +1,4 @@
-import {
-    FreeResponseQuestion,
-    MultipleChoiceQuestion,
-    Question,
-    SelectAllQuestion,
-    SentenceCompletionQuestion,
-    Test,
-    TrueFalseQuestion
-} from "../types";
+import { Question, QuestionWithTopic, Test, TestBank } from "../types";
 
 import { romanFoodBank } from "@/src/banks/romanFoodBank";
 import { romanCultureBank } from "@/src/banks/romanCultureBank";
@@ -16,21 +8,10 @@ import { designPrinciplesBank } from "@/src/banks/designPrinciplesBank";
 import { graphicDesignStudentBank } from "@/src/banks/graphicDesignStudentBank";
 import { typographyStudentBank } from "@/src/banks/typographyStudentBank";
 import { typographyUIBank } from "@/src/banks/typographyUIBank";
-import { create } from "domain";
 
 
 
-export type KnownFileQuestions = {
-    freeResponse: FreeResponseQuestion[];
-    multipleChoice: MultipleChoiceQuestion[];
-    selection: SelectAllQuestion[];
-    sentenceCompletion: SentenceCompletionQuestion[];
-    trueFalse: TrueFalseQuestion[];
-}
-
-
-
-const KNOWN_FILES_TO_QUESTIONS: Record<string, KnownFileQuestions> = {
+const KNOWN_FILES_TO_QUESTIONS: Record<string, TestBank> = {
     "15_roman-food-hannah.pptx" : romanFoodBank,
     "1109-313-Roman_Culture.pdf" : romanCultureBank,
     "Dr-Anitha-V-Roman-Political-System.pdf" : romanPoliticsBank,
@@ -51,6 +32,7 @@ const KNOWN_FILES_TO_TITLES: Record<string, string> = {
     "How To Use Typography In UI Design_ A Beginner's Guide.pdf" : "UI Design",
     "Typography-student.pptx" : "UI Design"
 }
+
 
 
 type File = {
@@ -80,7 +62,7 @@ export const getRecognizedFiles = (files: File[]) => {
 // Creates name by concatenating title themes, themes assigned to files beforehand
 const createTestName = (files: string[]) => {
     const titles = new Set(files.map(fileName => KNOWN_FILES_TO_TITLES[fileName]));
-    return "Test on " +Array.from(titles).join(', ');
+    return "Test on " + Array.from(titles).join(', ');
 }
 
 // This will only be called if files is not length 0. The files are from getRecognizedFiles, so all will be recognized.
@@ -95,10 +77,11 @@ export const getTestFromFiles = (config: TestConfig, files: string[]): Test => {
         questions: [],
     };
 
-    const allAvailableQuestions: Question[] = [];
+    const allAvailableQuestions: QuestionWithTopic[] = [];
 
     files.forEach((fileName, fileIndex) => {
         const fileQuestions = KNOWN_FILES_TO_QUESTIONS[fileName];
+        const topic = fileQuestions.topic;
         const fileQuestionPool: Question[] = [];
 
         if (config.questionTypes.multipleChoice) {
@@ -123,7 +106,9 @@ export const getTestFromFiles = (config: TestConfig, files: string[]): Test => {
         }
         
         const shuffled = fileQuestionPool.sort(() => Math.random() - 0.5);
-        allAvailableQuestions.push(...shuffled.slice(0, numQuestionsFromThisFile));
+        allAvailableQuestions.push(
+            ...shuffled.slice(0, numQuestionsFromThisFile).map(q => ({ ...q, topic }))
+        );
     });
 
     // One more shuffle to mix up order of files.
