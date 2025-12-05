@@ -9,7 +9,7 @@ export default function Page() {
             <div className="text-center space-y-8">
                 <div>
                     <p className="text-xl text-gray-600 mb-2">Welcome to</p>
-                    <h1 className="text-6xl font-bold text-gray-900">
+                    <h1 className="text-6xl font-bold text-blue-600">
                         TestSmith🔨
                     </h1>
                 </div>

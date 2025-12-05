@@ -146,7 +146,7 @@ export default function TestPage() {
                                 {!review ?
                                     <button
                                         onClick={handleSubmit}
-                                        className="cursor-pointer bg-gray-400 hover:bg-gray-500 text-gray-900 font-semibold px-16 py-4 rounded text-lg transition-colors"
+                                        className="cursor-pointer bg-blue-500 hover:bg-blue-600 text-white font-semibold px-16 py-4 rounded text-lg transition-colors"
                                     >
                                         Submit
                                     </button>
@@ -154,7 +154,7 @@ export default function TestPage() {
                                     <Link href="/overview">
                                         <button
                                             onClick={handleContinue}
-                                            className="cursor-pointer bg-gray-400 hover:bg-gray-500 text-gray-900 font-semibold px-16 py-4 rounded text-lg transition-colors"
+                                            className="cursor-pointer bg-blue-500 hover:bg-blue-600 text-white font-semibold px-16 py-4 rounded text-lg transition-colors"
                                         >
                                             Continue
                                         </button>

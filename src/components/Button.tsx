@@ -21,7 +21,7 @@ export default function Button({ children, onClick, type = "button", disabled = 
             disabled={disabled}
             onClick={onClick}
             className={
-                `px-8 py-3 text-xl text-gray-700 bg-gray-200 rounded transition-colors ${disabled ? "opacity-50 cursor-not-allowed" : "hover:bg-gray-300 cursor-pointer"} ` +
+                `px-8 py-3 text-xl text-white bg-blue-500 rounded transition-colors ${disabled ? "opacity-50 cursor-not-allowed" : "hover:bg-blue-600 cursor-pointer"} ` +
                 className
             }
         >
